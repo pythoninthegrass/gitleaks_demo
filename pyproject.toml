@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "python_template"
+name = "gitleaks_demo"
 version = "0.1.0"
 description = ""
 authors = ["pythoninthegrass <4097471+pythoninthegrass@users.noreply.github.com>"]
