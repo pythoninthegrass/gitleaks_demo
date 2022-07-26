@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  app:
+    container_name: hello
+    image: docker_python
+    tty: true               # remove for `entrypoint` in Dockerfile
+    stdin_open: true        # remove for `entrypoint` in Dockerfile
+    build:
+      context: .
+      dockerfile: ./Dockerfile
