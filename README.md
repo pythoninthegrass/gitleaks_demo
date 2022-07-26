@@ -18,10 +18,21 @@ Learning a programming language is hard. Not committing secrets [doesn't have to
 `TODO`
 
 ## Usage
-`TODO`
+```bash
+# TODO: documentme
+export GITLEAKS_CONFIG=$(pwd)/gitleaks.toml
+export GITLEAKS_REPORT=$(pwd)/gitleaks_report.json
+gitleaks detect
+gitleaks detect -r $GITLEAKS_REPORT
+gitleaks detect --no-git
+gitleaks detect --no-git -r $GITLEAKS_REPORT
+```
 
 ## TODO
-`TODO`
+* `settings.json` leak not detected
+* Attempt to commit `.env` after commenting out in `.gitignore`
 
 ## Further Reading
-`TODO`
+[zricethezav/gitleaks: Protect and discover secrets using Gitleaks 🔑](https://github.com/zricethezav/gitleaks)
+
+[Top 9 Git Secret Scanning Tools for DevSecOps - Spectral](https://spectralops.io/blog/top-9-git-secret-scanning-tools/)
