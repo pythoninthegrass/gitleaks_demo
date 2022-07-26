@@ -12,9 +12,9 @@
                 // "args": ["-d", "/Volumes/Data"],
                 // "args": ["-f", "menubar.dmg"],
                 // "args": ["-h"],
-                // "env": {
-                //     "CREDS": "REDACTED",
-                // }
+                "env": {
+                    "CREDS": "REDACTED",
+                }
             }
         ]
     }
