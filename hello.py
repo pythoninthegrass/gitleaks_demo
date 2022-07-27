@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import os
 import boto3
 from flask import Flask, render_template
@@ -12,6 +13,7 @@ aws_session = boto3.Session(
     aws_secret_access_key=aws_secret_key,
 )
 db_client = aws_session.client('dynamodb')
+
 
 @app.route('/')
 def get_index():
@@ -31,6 +33,7 @@ def get_index():
         title="WM Security Dashboard",
         list_of_users=parsed_db_results
     )
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000)
