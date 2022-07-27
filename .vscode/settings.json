@@ -9,9 +9,7 @@
                 "console": "integratedTerminal",
                 "cwd": "${fileDirname}",
                 "env": {
-                    "CREDS": "REDACTED",
-                    "ACCESS_KEY_ID": "REDACTED")[^"]*==>REMOVED",
-                    "SECRET_ACCESS_KEY": "REDACTED"
+                    "CREDS": "REDACTED"
                 }
             }
         ]
