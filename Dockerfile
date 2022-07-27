@@ -99,5 +99,5 @@ USER appuser
 
 WORKDIR $HOME/app
 
-# ENTRYPOINT ["python", "app.py"]
-CMD ["/bin/bash"]
+ENTRYPOINT ["python", "hello.py"]
+#CMD ["/bin/bash"]
