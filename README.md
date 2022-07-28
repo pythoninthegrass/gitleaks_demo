@@ -12,14 +12,54 @@ Learning a programming language is hard. Not committing secrets [doesn't have to
   * [Setup](#setup)
   * [Usage](#usage)
   * [TODO](#todo)
+  * [Red Team Exercise](#red-team-exercise)
   * [Further Reading](#further-reading)
 
 ## Setup
-`TODO`
+* gitleaks
+```bash
+# source
+git clone https://github.com/zricethezav/gitleaks.git
+cd gitleaks
+make build
+
+# brew
+brew install gitleaks
+```
+* pre-commit
+```bash
+# pip
+pip install pre-commit
+
+# brew
+brew install pre-commit
+
+# install .pre-commit-config.yaml
+pre-commit install
+
+# test
+λ pre-commit install
+pre-commit installed at .git/hooks/pre-commit
+λ pre-commit run --all-files
+[INFO] Initializing environment for https://github.com/zricethezav/gitleaks.
+[INFO] Installing environment for https://github.com/zricethezav/gitleaks.
+[INFO] Once installed this environment will be reused.
+[INFO] This may take a few minutes...
+Detect hardcoded secrets.................................................Passed
+```
 
 ## Usage
+* `git commit`
 ```bash
-# TODO: documentme
+# commit a secret
+SKIP=gitleaks git commit -m "skip gitleaks check"
+
+# don't commit a secret
+git commit -m "this commit contains a secret"
+```
+* `gitleaks detect`
+```bash
+# local scan
 export GITLEAKS_CONFIG=$(pwd)/gitleaks.toml
 export GITLEAKS_REPORT=$(pwd)/gitleaks_report.json
 gitleaks detect
@@ -40,5 +80,7 @@ Attempt to abuse the access you get (e.g can you find any admin passwords?)
 
 ## Further Reading
 [zricethezav/gitleaks: Protect and discover secrets using Gitleaks 🔑](https://github.com/zricethezav/gitleaks)
+
+[pre-commit](https://pre-commit.com/)
 
 [Top 9 Git Secret Scanning Tools for DevSecOps - Spectral](https://spectralops.io/blog/top-9-git-secret-scanning-tools/)
