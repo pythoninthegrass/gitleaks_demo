@@ -70,13 +70,12 @@ gitleaks detect --no-git -r $GITLEAKS_REPORT
 
 ## TODO
 * `settings.json` leak not detected
-* Attempt to commit `.env` after commenting out in `.gitignore`
+* ~~Attempt to commit `.env` after commenting out in `.gitignore`~~
 
 ## Red Team Exercise
-
 Look for any leaked cloud keys
 
-Attempt to abuse the access you get (e.g can you find any admin passwords?)
+Attempt to abuse the access you get (e.g., can you find any admin passwords?)
 
 ## Further Reading
 [zricethezav/gitleaks: Protect and discover secrets using Gitleaks 🔑](https://github.com/zricethezav/gitleaks)
