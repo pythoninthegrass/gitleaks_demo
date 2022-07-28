@@ -81,15 +81,18 @@ gitleaks detect --no-git -r $GITLEAKS_REPORT
 ```
 * `bfg`
 ```bash
+# remove the offending file first
+git rm .env
+
 # clone problem child
 git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
 
 # delete file
-λ java -jar $(which bfg) --delete-files .env --no-blob-protection gitleaks_demo.git
+λ java -jar $(which bfg) --delete-files .env gitleaks_demo.git
 
 Using repo : gitleaks_demo.git
 
-Found 22 objects to protect
+Found 23 objects to protect
 Found 2 commit-pointing refs : HEAD, refs/heads/main
 
 Protected commits
@@ -97,22 +100,21 @@ Protected commits
 
 These are your protected commits, and so their contents will NOT be altered:
 
- * commit 0ce99450 (protected by 'HEAD') - contains 1 dirty file :
-	- .env (646 B )
-...
+ * commit bd45c07e (protected by 'HEAD')
+<SNIP>
 Deleted files
 -------------
 
-	Filename   Git id
-	----------------------------
-	.env     | c48f0d38 (646 B )
+        Filename   Git id           
+        ----------------------------
+        .env     | c48f0d38 (646 B )
 
 # strip references in commit history
 cd gitleaks_demo.git
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 
-# force push changes
-git push -f
+# push changes
+git push        # `-f` to force -- destructive
 ```
 
 ## TODO
