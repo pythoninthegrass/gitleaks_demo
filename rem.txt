@@ -1,3 +1,3 @@
-regex:(?<="CREDS": ")[^"]*==>REMOVED
-regex:(?<="ACCESS_KEY_ID": ")[^"]*==>REMOVED
-regex:(?<="SECRET_ACCESS_KEY": ")[^"]*==>REMOVED
+regex:(?<="CREDS": ")[^"]*==>REDACTED
+regex:(?<="ACCESS_KEY_ID": ")[^"]*==>REDACTED
+regex:(?<="SECRET_ACCESS_KEY": ")[^"]*==>REDACTED
