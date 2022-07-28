@@ -5,14 +5,14 @@
 ## Summary
 Learning a programming language is hard. Not committing secrets [doesn't have to be that way](https://github.com/zricethezav/gitleak).
 
-
 **Table of Contents**
 * [gitleaks_demo](#gitleaks_demo)
   * [Summary](#summary)
   * [Setup](#setup)
   * [Usage](#usage)
+    * [Blue Team](#blue-team)
+    * [Red Team](#red-team)
   * [TODO](#todo)
-  * [Red Team Exercise](#red-team-exercise)
   * [Further Reading](#further-reading)
 
 ## Setup
@@ -61,6 +61,7 @@ mv bfg.jar /usr/local/bin/bfg
 ```
 
 ## Usage
+### Blue Team
 * `git commit`
 ```bash
 # commit a secret
@@ -74,10 +75,10 @@ git commit -m "this commit contains a secret"
 # local scan
 export GITLEAKS_CONFIG=$(pwd)/gitleaks.toml
 export GITLEAKS_REPORT=$(pwd)/gitleaks_report.json
-gitleaks detect
-gitleaks detect -r $GITLEAKS_REPORT
-gitleaks detect --no-git
-gitleaks detect --no-git -r $GITLEAKS_REPORT
+gitleaks detect --redact -v
+gitleaks detect --redact -v -r $GITLEAKS_REPORT
+gitleaks detect --redact -v --no-git
+gitleaks detect --redact -v --no-git -r $GITLEAKS_REPORT
 ```
 * `bfg`
 ```bash
@@ -141,15 +142,13 @@ git commit -m "Update README.md"                                                
 git pull --rebase
 git push
 ```
+### Red Team
+* Look for any leaked cloud keys
+* Attempt to abuse the access you get (e.g., can you find any admin passwords?)
 
 ## TODO
 * `settings.json` leak not detected
 * ~~Attempt to commit `.env` after commenting out in `.gitignore`~~
-
-## Red Team Exercise
-Look for any leaked cloud keys
-
-Attempt to abuse the access you get (e.g., can you find any admin passwords?)
 
 ## Further Reading
 [zricethezav/gitleaks: Protect and discover secrets using Gitleaks 🔑](https://github.com/zricethezav/gitleaks)
