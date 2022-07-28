@@ -16,7 +16,7 @@ Learning a programming language is hard. Not committing secrets [doesn't have to
   * [Further Reading](#further-reading)
 
 ## Setup
-* gitleaks
+* `gitleaks` install
 ```bash
 # source
 git clone https://github.com/zricethezav/gitleaks.git
@@ -47,6 +47,18 @@ pre-commit installed at .git/hooks/pre-commit
 [INFO] This may take a few minutes...
 Detect hardcoded secrets.................................................Passed
 ```
+* `bfg` install
+```bash
+# env
+username=rtyley
+projectname=bfg-repo-cleaner
+
+# extract bfg version number then download bin from alternate host
+ver=$(curl -s https://api.github.com/repos/${username}/${projectname}/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/[^0-9\.]//g')
+url="https://repo1.maven.org/maven2/com/madgag/bfg/${ver}/bfg-${ver}.jar"
+curl -LJO $url && mv bfg-${ver}.jar bfg.jar
+mv bfg.jar /usr/local/bin/bfg
+```
 
 ## Usage
 * `git commit`
@@ -67,6 +79,41 @@ gitleaks detect -r $GITLEAKS_REPORT
 gitleaks detect --no-git
 gitleaks detect --no-git -r $GITLEAKS_REPORT
 ```
+* `bfg`
+```bash
+# clone problem child
+git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
+
+# delete file
+λ java -jar $(which bfg) --delete-files .env --no-blob-protection gitleaks_demo.git
+
+Using repo : gitleaks_demo.git
+
+Found 22 objects to protect
+Found 2 commit-pointing refs : HEAD, refs/heads/main
+
+Protected commits
+-----------------
+
+These are your protected commits, and so their contents will NOT be altered:
+
+ * commit 0ce99450 (protected by 'HEAD') - contains 1 dirty file :
+	- .env (646 B )
+...
+Deleted files
+-------------
+
+	Filename   Git id
+	----------------------------
+	.env     | c48f0d38 (646 B )
+
+# strip references in commit history
+cd gitleaks_demo.git
+git reflog expire --expire=now --all && git gc --prune=now --aggressive
+
+# force push changes
+git push -f
+```
 
 ## TODO
 * `settings.json` leak not detected
@@ -81,5 +128,11 @@ Attempt to abuse the access you get (e.g., can you find any admin passwords?)
 [zricethezav/gitleaks: Protect and discover secrets using Gitleaks 🔑](https://github.com/zricethezav/gitleaks)
 
 [pre-commit](https://pre-commit.com/)
+
+[bfg download](https://github.com/Installomator/Installomator/blob/main/Installomator.sh#L490)
+
+[bfg usage](https://rtyley.github.io/bfg-repo-cleaner/)
+
+[bfg regex](https://gist.github.com/w0rd-driven/60779ad557d9fd86331734f01c0f69f0?permalink_comment_id=3985799#gistcomment-3985799)
 
 [Top 9 Git Secret Scanning Tools for DevSecOps - Spectral](https://spectralops.io/blog/top-9-git-secret-scanning-tools/)
