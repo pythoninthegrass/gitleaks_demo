@@ -113,8 +113,33 @@ Deleted files
 cd gitleaks_demo.git
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 
-# push changes
-git push        # `-f` to force -- destructive
+# force push changes (rewrite repo history to remove sensitive data)
+git push -f
+
+# update full repo (needs rebase to avoid fast-forward error)
+cd ~/git/gitleaks_demo
+λ git pull --rebase
+Successfully rebased and updated refs/heads/main.
+λ git push
+Enumerating objects: 5, done.
+<SNIP>
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:pythoninthegrass/gitleaks_demo.git
+   dc1323a..be09c98  main -> main
+
+# remove any lingering creds in-place
+rm -rf gitleaks_demo.git
+git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
+# REDACT secret in file or append `--no-blob-protection` to bfg command below (destructive)
+java -jar $(which bfg) -fe rem.txt --replace-text rem.txt gitleaks_demo.git     # filter-excluding '*.{xml,pdf}'
+cd gitleaks_demo.git
+git reflog expire --expire=now --all && git gc --prune=now --aggressive
+git push -f
+cd ~/git/gitleaks_demo
+git add README.md
+git commit -m "Update README.md"                                                # commit any pending changes
+git pull --rebase
+git push
 ```
 
 ## TODO
@@ -130,6 +155,10 @@ Attempt to abuse the access you get (e.g., can you find any admin passwords?)
 [zricethezav/gitleaks: Protect and discover secrets using Gitleaks 🔑](https://github.com/zricethezav/gitleaks)
 
 [pre-commit](https://pre-commit.com/)
+
+[Is it better to use git pull --rebase than git pull --ff-only - Stack Overflow](https://stackoverflow.com/questions/64846230/is-it-better-to-use-git-pull-rebase-than-git-pull-ff-only)
+
+[Removing sensitive data from a repository - GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
 
 [bfg download](https://github.com/Installomator/Installomator/blob/main/Installomator.sh#L490)
 
