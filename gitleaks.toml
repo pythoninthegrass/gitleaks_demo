@@ -13,7 +13,17 @@ paths = [
     '''vendor''',
     '''.env.example''',
     '''gitleaks_report.json''',
+    '''.venv''',
 ]
+
+# * added to 'generic-api-key'
+# [[rules]]
+# description = "settings.json"
+# id = "env-var"
+# # regex = '''^\"CREDS\"\:\s".+"$'''
+# regex = '''CREDS[0-9a-fA-F]+'''
+# # filenameregex = "settings.json"
+# tags = ["vscode", "settings","json"]
 
 [[rules]]
 description = "Adafruit API Key"
@@ -1134,11 +1144,21 @@ keywords = [
 [[rules]]
 description = "Generic API Key"
 id = "generic-api-key"
-regex = '''(?i)(?:key|api|token|secret|client|passwd|password|auth|access)(?:[0-9a-z\-_\t .]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:=|\|\|:|<=|=>|:)(?:'|\"|\s|=|\x60){0,5}([0-9a-z\-_.=]{10,150})(?:['|\"|\n|\r|\s|\x60]|$)'''
+regex = '''(?i)(?:key|api|token|secret|client|passwd|password|auth|access|env|creds)(?:[0-9a-z\-_\t .]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:=|\|\|:|<=|=>|:)(?:'|\"|\s|=|\x60){0,5}([0-9a-z\-_.=]{10,150})(?:['|\"|\n|\r|\s|\x60]|$)'''
 secretGroup = 1
-entropy = 3.5
+entropy = 3.2
 keywords = [
-    "key","api","token","secret","client","passwd","password","auth","access",
+    "key",
+    "api",
+    "token",
+    "secret",
+    "client",
+    "passwd",
+    "password",
+    "auth",
+    "access",
+    "env",
+    "creds",
 ]
 [rules.allowlist]
 stopwords= [
@@ -1152,7 +1172,7 @@ stopwords= [
     "define",
     "config",
     "credential",
-    "setting",
+    # "setting",
     "sample",
     "xxxxxx",
     "000000",
@@ -1463,7 +1483,7 @@ stopwords= [
     "new.",
     "dashboard",
     "when",
-    "setting",
+    # "setting",
     "level",
     "post",
     "standard",
