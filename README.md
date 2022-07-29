@@ -54,8 +54,7 @@ projectname=bfg-repo-cleaner
 # extract bfg version number then download bin from alternate host
 ver=$(curl -s https://api.github.com/repos/${username}/${projectname}/releases/latest | grep tag_name | cut -d '"' -f 4 | sed 's/[^0-9\.]//g')
 url="https://repo1.maven.org/maven2/com/madgag/bfg/${ver}/bfg-${ver}.jar"
-curl -LJO $url && mv bfg-${ver}.jar bfg.jar
-mv bfg.jar /usr/local/bin/bfg
+curl -LJO $url && mv bfg-${ver}.jar /usr/local/bin/bfg
 ```
 
 ## Usage
@@ -87,7 +86,7 @@ git rm .env
 git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
 
 # delete file
-λ java -jar $(which bfg) --delete-files .env gitleaks_demo.git
+λ java -jar /usr/local/bin/bfg --delete-files .env gitleaks_demo.git
 
 Using repo : gitleaks_demo.git
 
@@ -130,7 +129,7 @@ To github.com:pythoninthegrass/gitleaks_demo.git
 rm -rf gitleaks_demo.git
 git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
 # REDACT secret in file or append `--no-blob-protection` to bfg command below (destructive)
-java -jar $(which bfg) -fe rem.txt --replace-text rem.txt gitleaks_demo.git     # filter-excluding '*.{xml,pdf}'
+java -jar /usr/local/bin/bfg -fe rem.txt --replace-text rem.txt gitleaks_demo.git     # filter-excluding '*.{xml,pdf}'
 cd gitleaks_demo.git
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 git push -f
