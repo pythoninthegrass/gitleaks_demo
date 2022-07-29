@@ -6,6 +6,7 @@ from pyqrcode import QRCode
 
 home = str(Path.home())
 
+# TODO: debug multiline string QR code encoding
 qr = pyqrcode.create(
     '''
     https://www.tailwindapp.com
