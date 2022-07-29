@@ -38,8 +38,6 @@ brew install pre-commit
 pre-commit install
 
 # test
-λ pre-commit install
-pre-commit installed at .git/hooks/pre-commit
 λ pre-commit run --all-files
 [INFO] Initializing environment for https://github.com/zricethezav/gitleaks.
 [INFO] Installing environment for https://github.com/zricethezav/gitleaks.
