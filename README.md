@@ -162,4 +162,6 @@ git push
 
 [bfg regex](https://gist.github.com/w0rd-driven/60779ad557d9fd86331734f01c0f69f0?permalink_comment_id=3985799#gistcomment-3985799)
 
+[Securing your repository - GitHub Docs](https://docs.github.com/en/code-security/getting-started/securing-your-repository)
+
 [Top 9 Git Secret Scanning Tools for DevSecOps - Spectral](https://spectralops.io/blog/top-9-git-secret-scanning-tools/)
