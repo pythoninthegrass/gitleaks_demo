@@ -157,12 +157,14 @@ git push
 
 [Removing sensitive data from a repository - GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
 
+[Encrypted secrets - GitHub Docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+
+[Securing your repository - GitHub Docs](https://docs.github.com/en/code-security/getting-started/securing-your-repository)
+
 [bfg download](https://github.com/Installomator/Installomator/blob/main/Installomator.sh#L490)
 
 [bfg usage](https://rtyley.github.io/bfg-repo-cleaner/)
 
 [bfg regex](https://gist.github.com/w0rd-driven/60779ad557d9fd86331734f01c0f69f0?permalink_comment_id=3985799#gistcomment-3985799)
-
-[Securing your repository - GitHub Docs](https://docs.github.com/en/code-security/getting-started/securing-your-repository)
 
 [Top 9 Git Secret Scanning Tools for DevSecOps - Spectral](https://spectralops.io/blog/top-9-git-secret-scanning-tools/)
