@@ -129,16 +129,17 @@ To github.com:pythoninthegrass/gitleaks_demo.git
 rm -rf gitleaks_demo.git
 git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
 # REDACT secret in file or append `--no-blob-protection` to bfg command below (destructive)
-java -jar /usr/local/bin/bfg -fe rem.txt --replace-text rem.txt gitleaks_demo.git     # filter-excluding '*.{xml,pdf}'
+java -jar /usr/local/bin/bfg -fe rem.txt --replace-text rem.txt gitleaks_demo.git       # filter-excluding '*.{xml,pdf}'
 cd gitleaks_demo.git
 git reflog expire --expire=now --all && git gc --prune=now --aggressive
 git push -f
 cd ~/git/gitleaks_demo
 git add README.md
-git commit -m "Update README.md"                                                # commit any pending changes
+git commit -m "Update README.md"                                                        # commit any pending changes
 git pull --rebase
 git push
 ```
+
 ### Red Team
 * Look for any leaked cloud keys
 * Attempt to abuse the access you get (e.g., can you find any admin passwords?)

@@ -2,6 +2,7 @@ name: run_script
 
 on:
   workflow_dispatch:
+
 jobs:
   setup_python:
     runs-on: ubuntu-latest
@@ -11,6 +12,7 @@ jobs:
       with:
         python-version: '3.10.5'
         architecture: 'x64'
+
   ci:
     strategy:
       fail-fast: false
@@ -30,6 +32,7 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - name: View poetry --help
         run: poetry --help
+
   scan_repos:
     name: Scan GitHub Repos
     runs-on: ubuntu-latest
