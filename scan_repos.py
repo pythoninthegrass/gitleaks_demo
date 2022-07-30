@@ -23,15 +23,22 @@ scan w/___ red team tool (e.g., trufflehog)
 
 home = Path.home()
 env = Path('.env')
+cwd = Path.cwd()
 
-if env.exists():
-    username = config('USERNAME', default='', cast=str)
-    limit = config('LIMIT', default=5, cast=int)
-    visibility = config('VISIBILITY', default='public', cast=str)
-else:
-    username = os.getenv('USERNAME')
-    limit = os.getenv('LIMIT')
-    visibility = os.getenv('VISIBILITY')
+# HARD-CODED VARS
+username = 'pythoninthegrass'
+limit = 5
+visibility = 'public'                  # public, private, internal
+
+# DYNAMIC VARS
+# if env.exists():
+#     username = config('USERNAME', default='', cast=str)
+#     limit = config('LIMIT', default=5, cast=int)
+#     visibility = config('VISIBILITY', default='public', cast=str)
+# else:
+#     username = os.getenv('USERNAME')
+#     limit = os.getenv('LIMIT')
+#     visibility = os.getenv('VISIBILITY')
 
 raw = gh("repo", "list", username, "--limit", limit, "--visibility", visibility, "--json", "url")
 
@@ -47,9 +54,13 @@ pub_repos = ansi_escape.sub('', pub_repos)
 df = pd.read_json(pub_repos)
 df = df[df['url'].str.startswith('https://')]
 
+# create directory if it doesn't exist
+db_dir = cwd/'raw'
+Path.mkdir(db_dir, exist_ok=True)
+
 # store the repo names as a tinydb database
-db = tinydb.TinyDB(Path(f"{home}/Downloads/repos.json"))
+db = tinydb.TinyDB(Path(f"{db_dir}/repos.json"))
 db.insert(json.loads(df.to_json()))
-# ic(db.all())
+ic(db.all())
 
 # TODO: scan repo URLs
