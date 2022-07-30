@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 
 import json
+import os
 import pandas as pd
 import re
 import tinydb
+from decouple import config
 from icecream import ic
 from pathlib import Path
 from sh import gh
+
+# verbose icecream
+ic.configureOutput(includeContext=True)
 
 '''
 Scan Repos
@@ -17,11 +22,18 @@ scan w/___ red team tool (e.g., trufflehog)
 '''
 
 home = Path.home()
-username = 'pythoninthegrass'
-lim = 5
-vis = 'public'                  # public, private, internal
+env = Path('.env')
 
-raw = gh("repo", "list", username, "--limit", lim, "--visibility", vis, "--json", "url")
+if env.exists():
+    username = config('USERNAME', default='', cast=str)
+    limit = config('LIMIT', default=5, cast=int)
+    visibility = config('VISIBILITY', default='public', cast=str)
+else:
+    username = os.getenv('USERNAME')
+    limit = os.getenv('LIMIT')
+    visibility = os.getenv('VISIBILITY')
+
+raw = gh("repo", "list", username, "--limit", limit, "--visibility", visibility, "--json", "url")
 
 # convert to utf-8
 pub_repos = raw.stdout.decode('utf-8')
