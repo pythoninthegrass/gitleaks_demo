@@ -4,54 +4,34 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup_python:
+  ci:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
+    - name: checkout repo content
+      uses: actions/checkout@v3
+    - name: setup python
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10.5'
         architecture: 'x64'
-
-  ci:
-    needs:
-      - setup_python
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10"]
-        poetry-version: ["1.1.13"]
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Run image
-        uses: abatilo/actions-poetry@v2.0.0
-        with:
-          poetry-version: ${{ matrix.poetry-version }}
-      - name: View poetry --help
-        run: poetry --help
-
-  scan_repos:
-    needs:
-      - ci
-    name: Scan GitHub Repos
-    runs-on: ubuntu-latest
-    steps:
-    - shell: bash
+        - name: Install dependencies
+          run: |
+            python -m pip install --upgrade pip
+            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          ref: # branch
+            main
+    - name: scan github repos
+      shell: bash
       run: |
         curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
         sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
         sudo apt update
-        sudo apt install gh -y
-    - shell: bash
+        sudo apt install --no-install-recommends -y gh
       env:
         username: ${{ secrets.USERNAME }}
         limit: ${{ secrets.LIMIT }}
         visibility: ${{ secrets.VISIBILITY }}
       run: |
-        python scan_repos.py
+        python scan_repos.py --username ${username} --limit ${limit} --visibility ${visibility}
