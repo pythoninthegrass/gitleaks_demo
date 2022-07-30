@@ -9,7 +9,9 @@
                 "console": "integratedTerminal",
                 "cwd": "${fileDirname}",
                 "env": {
-                    "CREDS": "REDACTED"
+                    "CREDS": "REDACTED",
+                    "ACCESS_KEY_ID": "AKIA3AC7P5M7GD7ZL7M2",
+                    "SECRET_ACCESS_KEY": "m+hsdLZyw8Tqnvtxd7o3i7zwiISsuokU5nE+CSZ8"
                 }
             }
         ]
