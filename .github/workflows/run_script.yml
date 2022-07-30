@@ -5,11 +5,13 @@ on:
 
 jobs:
   ci:
-    matrix:
-        python-version: ["3.10.5"]
-        poetry-version: ["1.1.13"]
-        os: [ubuntu-latest]
-        arch: ['x64']
+    strategy:
+      fail-fast: false
+      matrix:
+          python-version: ["3.10.5"]
+          poetry-version: ["1.1.13"]
+          os: [ubuntu-latest]
+          arch: ['x64']
 
     runs-on: ${{ matrix.os }}
 
