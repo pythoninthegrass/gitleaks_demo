@@ -18,7 +18,7 @@ PyQRCode = "^1.2.1"
 pypng = "^0.20220715.0"
 sh = "^1.14.3"
 tinydb = "^4.7.0"
-decouple = "^0.0.7"
+python-decouple = "^3.6"
 
 [tool.poetry.dev-dependencies]
 icecream = "^2.1.1"
