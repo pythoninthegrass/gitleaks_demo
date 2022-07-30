@@ -1,0 +1,43 @@
+name: run_script
+
+on:
+  workflow_dispatch:
+jobs:
+  setup_python:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10.5'
+        architecture: 'x64'
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+        poetry-version: ["1.1.13"]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: View poetry --help
+        run: poetry --help
+  scan_repos:
+    name: Scan GitHub Repos
+    runs-on: ubuntu-latest
+    steps:
+    - shell: bash
+      env:
+        username: ${{ secrets.USERNAME }}
+        limit: ${{ secrets.LIMIT }}
+        visibility: ${{ secrets.VISIBILITY }}
+      run: |
+        python scan_repos.py
