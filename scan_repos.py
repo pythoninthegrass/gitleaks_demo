@@ -25,20 +25,14 @@ home = Path.home()
 env = Path('.env')
 cwd = Path.cwd()
 
-# HARD-CODED VARS
-username = 'pythoninthegrass'
-limit = 5
-visibility = 'public'                  # public, private, internal
-
-# DYNAMIC VARS
-# if env.exists():
-#     username = config('USERNAME', default='', cast=str)
-#     limit = config('LIMIT', default=5, cast=int)
-#     visibility = config('VISIBILITY', default='public', cast=str)
-# else:
-#     username = os.getenv('USERNAME')
-#     limit = os.getenv('LIMIT')
-#     visibility = os.getenv('VISIBILITY')
+if env.exists():
+    username = config('USERNAME', default='', cast=str)
+    limit = config('LIMIT', default=5, cast=int)
+    visibility = config('VISIBILITY', default='public', cast=str)
+else:
+    username = os.getenv('USERNAME')
+    limit = os.getenv('LIMIT')
+    visibility = os.getenv('VISIBILITY')    # public, private, internal
 
 raw = gh("repo", "list", username, "--limit", limit, "--visibility", visibility, "--json", "url")
 
