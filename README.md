@@ -79,8 +79,8 @@ gitleaks detect --redact -v --no-git -r $GITLEAKS_REPORT
 ```
 * `bfg`
 ```bash
-# remove the offending file first
-git rm .env
+# remove the offending file from git history (leaves local copy)
+git rm --cached .env
 
 # clone problem child
 git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
