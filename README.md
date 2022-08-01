@@ -35,7 +35,7 @@ pip install pre-commit
 brew install pre-commit
 
 # install .pre-commit-config.yaml
-pre-commit install
+pre-commit install                  # install/uninstall
 
 # test
 λ pre-commit run --all-files
@@ -114,6 +114,14 @@ git reflog expire --expire=now --all && git gc --prune=now --aggressive
 # force push changes (rewrite repo history to remove sensitive data)
 git push -f
 
+# OPTIONAL: if the remote rejects `git push -f` (e.g., PR removed branch)
+# remove references within mirrored repo
+#  - [deleted]         dev
+#  + 681f990...0e35aa3 main -> main (forced update)
+#  ! [remote rejected] refs/pull/5/head -> refs/pull/5/head (deny updating a hidden ref)
+# error: failed to push some refs to 'github.com:pythoninthegrass/gitleaks_demo.git
+# git show-ref | cut -d' ' -f2 | grep 'pull' | xargs -r -L1 git update-ref -d
+
 # update full repo (needs rebase to avoid fast-forward error)
 cd ~/git/gitleaks_demo
 λ git pull --rebase
@@ -166,5 +174,7 @@ git push
 [bfg usage](https://rtyley.github.io/bfg-repo-cleaner/)
 
 [bfg regex](https://gist.github.com/w0rd-driven/60779ad557d9fd86331734f01c0f69f0?permalink_comment_id=3985799#gistcomment-3985799)
+
+[bash - git push --mirror without pull refs - Stack Overflow](https://stackoverflow.com/questions/47776357/git-push-mirror-without-pull-refs)
 
 [Top 9 Git Secret Scanning Tools for DevSecOps - Spectral](https://spectralops.io/blog/top-9-git-secret-scanning-tools/)
