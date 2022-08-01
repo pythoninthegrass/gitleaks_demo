@@ -18,6 +18,7 @@ Learning a programming language is hard. Not committing secrets [doesn't have to
 
 ## Running the Target App
 * Install [docker-compose](https://docs.docker.com/compose/install/)
+* Set either `.env` or env vars for `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` (see: `.env.example`)
 * Setup the Docker container
     ```bash
     # multistage build
