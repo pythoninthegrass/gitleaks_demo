@@ -1,11 +1,17 @@
-version: "3.7"
+version: "3.9"
 
 services:
   app:
-    container_name: hello
+    container_name: gitleaks-cont
     image: docker_python
-    tty: true               # remove for `entrypoint` in Dockerfile
-    stdin_open: true        # remove for `entrypoint` in Dockerfile
+    tty: false               # false for `entrypoint` in Dockerfile
+    stdin_open: false        # false for `entrypoint` in Dockerfile
+    env_file:
+      - ./.env
+    volumes:
+      - .:/home/appuser/app
+    ports:
+      - 8000:8000
     build:
-      context: .
+      context: ./
       dockerfile: ./Dockerfile

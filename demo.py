@@ -1,17 +1,34 @@
 #!/usr/bin/env python3
 
-import os
 import boto3
+import os
+from decouple import config
 from flask import Flask, render_template
+# from icecream import ic
+from pathlib import Path
 
-aws_access_key = os.environ.get('ACCESS_KEY_ID')
-aws_secret_key = os.environ.get('SECRET_ACCESS_KEY')
+# verbose icecream
+# ic.configureOutput(includeContext=True)
+
+home = Path.home()
+env = Path('.env')
+cwd = Path.cwd()
+
+if env.exists():
+    aws_access_key = config('ACCESS_KEY_ID', default='', cast=str)
+    aws_secret_key = config('SECRET_ACCESS_KEY', default='', cast=str)
+else:
+    aws_access_key = os.getenv('ACCESS_KEY_ID')
+    aws_secret_key = os.getenv('SECRET_ACCESS_KEY')
 
 app = Flask(__name__, template_folder='html')
+
 aws_session = boto3.Session(
     aws_access_key_id=aws_access_key,
     aws_secret_access_key=aws_secret_key,
+    region_name='us-east-1'
 )
+
 db_client = aws_session.client('dynamodb')
 
 
