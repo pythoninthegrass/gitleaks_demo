@@ -8,20 +8,25 @@ Learning a programming language is hard. Not committing secrets [doesn't have to
 **Table of Contents**
 * [gitleaks_demo](#gitleaks_demo)
   * [Summary](#summary)
-  * [Setup](#setup)
-  * [Usage](#usage)
+  * [Running the Target App](#running-the-target-app)
+  * [Gitleaks Setup](#gitleaks-setup)
+  * [Gitleaks Usage](#gitleaks-usage)
     * [Blue Team](#blue-team)
     * [Red Team](#red-team)
   * [TODO](#todo)
   * [Further Reading](#further-reading)
 
 ## Running the Target App
+* Install [docker-compose](https://docs.docker.com/compose/install/)
+* Setup the Docker container
+    ```bash
+    # multistage build
+    docker-compose build --parallel --force-rm
 
-`docker-compose build --parallel --force-rm`
-
-`docker-compose up`
-
-then navigate to http://localhost:8000/.
+    # start container
+    docker-compose up
+    ```
+* Navigate to http://localhost:8000/ in a web browser
 
 
 ## Gitleaks Setup
