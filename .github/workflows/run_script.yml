@@ -1,3 +1,7 @@
+name: run_script
+
+on: [workflow_dispatch]     # pull_request, push, workflow_dispatch
+
 jobs:
   ci:
     strategy:
