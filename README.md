@@ -23,6 +23,7 @@ Testing has primarily been done on macOS, but it's likely most of the code works
 ## Running the Target App
 * Install [docker-compose](https://docs.docker.com/compose/install/)
 * Set either `.env` or env vars for `ACCESS_KEY_ID` and `SECRET_ACCESS_KEY` (see: `.env.example`)
+  * Need to uncomment `docker-compose.yml` code blocks for mutually exclusive choices (`env_file` vs. `environment`)
 * Setup the Docker container
     ```bash
     # multistage build
@@ -224,6 +225,10 @@ Testing has primarily been done on macOS, but it's likely most of the code works
 [Encrypted secrets - GitHub Docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
 
 [Securing your repository - GitHub Docs](https://docs.github.com/en/code-security/getting-started/securing-your-repository)
+
+[Environment variables in Compose | Docker Documentation](https://docs.docker.com/compose/environment-variables/)
+
+[linux - How do I delete an exported environment variable? - Stack Overflow](https://stackoverflow.com/questions/6877727/how-do-i-delete-an-exported-environment-variable/6877747#6877747)
 
 [bfg download](https://github.com/Installomator/Installomator/blob/main/Installomator.sh#L490)
 

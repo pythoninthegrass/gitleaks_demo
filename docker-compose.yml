@@ -4,10 +4,13 @@ services:
   app:
     container_name: gitleaks-cont
     image: docker_python
-    tty: false               # false for `entrypoint` in Dockerfile
-    stdin_open: false        # false for `entrypoint` in Dockerfile
-    env_file:
+    tty: false                                        # false for `entrypoint` in Dockerfile
+    stdin_open: false                                 # false for `entrypoint` in Dockerfile
+    env_file:                                          # use .env file for environment variables
       - ./.env
+    # environment:                                    # use environment variables instead of .env file
+    #   - ACCESS_KEY_ID=${ACCESS_KEY_ID:?err}
+    #   - SECRET_ACCESS_KEY=${SECRET_ACCESS_KEY:?err}
     volumes:
       - .:/home/appuser/app
     ports:
