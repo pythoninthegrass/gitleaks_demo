@@ -9,6 +9,7 @@ from decouple import config
 from icecream import ic
 from pathlib import Path
 from sh import gh
+from sh import trufflehog
 
 # verbose icecream
 ic.configureOutput(includeContext=True)
@@ -18,6 +19,7 @@ env = Path('.env')
 cwd = Path.cwd()
 db_dir = cwd/'raw'
 fn = Path(f"{cwd}/raw/repos.json")
+results = Path(f"{cwd}/raw/results.json")
 
 # create directory if it doesn't exist
 Path.mkdir(db_dir, exist_ok=True)
@@ -71,13 +73,29 @@ def read_repos(db):
     return ic(db.all())
 
 
+# TODO: export results to tinydb
+def scan_repos(repos):
+    '''Scan the repos for leaked secrets'''
+    # call bin: `trufflehog git https://github.com/username/reponame --json --only-verified`
+    res = [trufflehog("git", repos[0]['url'][i], "--json", "--only-verified") for i in repos[0]['url']]
+
+    # replace None values in a list with empty string (e.g., '[, , , , ])
+    res = [i if i is not None else '' for i in res]
+
+    # tinydb table with the results
+    # db = tinydb.TinyDB(Path(results))
+    # db.insert(json.loads(trufflehog.stdout.decode('utf-8')))
+
+
 def main():
     df = get_repos(username, limit, visibility)
     db = write_repos(fn, df)
+    scan = scan_repos(read_repos(db))
+    if scan is not None:
+        print(scan)
+    else:
+        print('No results')
 
-    return read_repos(db)
 
-
-# TODO: scan repo URLs
 if __name__ == "__main__":
     main()
