@@ -10,4 +10,4 @@ updates:
   - package-ecosystem: "pip"      # package manager
     directory: "/"                # Files stored in repository root
     schedule:
-      interval: "weekly"
+      interval: "monthly"
