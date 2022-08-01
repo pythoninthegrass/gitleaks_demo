@@ -5,6 +5,10 @@
 ## Summary
 Learning a programming language is hard. Not committing secrets [doesn't have to be that way](https://github.com/zricethezav/gitleak).
 
+This repo covers the content from the Meetup [presentation](https://docs.google.com/presentation/d/e/2PACX-1vRDZHJBZPgJpfMF-eR7-cBHJHuM6seu2Nr78pbCFf-DHsGtgx6U_f_PFzQ9LpUIZGl71cgaDR1kZI30/pub?start=false&loop=false&delayms=3000&slide=id.p), [Securing GitHub Repos](https://www.meetup.com/okccoffeeandcode/events/287355886/) given on July 30th, 2022 at [Tailwind](https://www.tailwindapp.com/) by [sw33tr0ll](https://github.com/sw33tr0ll) and [pythoninthegrass](https://github.com/pythoninthegrass).
+
+Testing has primarily been done on macOS, but it's likely most of the code works on Linux. Windows has not been tested. PRs welcome 🙏 
+
 **Table of Contents**
 * [gitleaks_demo](#gitleaks_demo)
   * [Summary](#summary)
