@@ -42,6 +42,7 @@ jobs:
     - name: run script
       shell: bash
       env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         username: ${{ secrets.USERNAME }}
         limit: ${{ secrets.LIMIT }}
         visibility: ${{ secrets.VISIBILITY }}
