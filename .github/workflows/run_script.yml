@@ -1,3 +1,7 @@
+name: run_script
+
+on: [workflow_dispatch]     # pull_request, push, workflow_dispatch
+
 jobs:
   ci:
     strategy:
@@ -39,7 +43,7 @@ jobs:
     - name: run script
       shell: bash
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         username: ${{ secrets.USERNAME }}
         limit: ${{ secrets.LIMIT }}
         visibility: ${{ secrets.VISIBILITY }}

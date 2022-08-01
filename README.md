@@ -15,7 +15,15 @@ Learning a programming language is hard. Not committing secrets [doesn't have to
   * [TODO](#todo)
   * [Further Reading](#further-reading)
 
-## Setup
+## Running the Target App
+
+`docker-compose build --parallel --force-rm`
+`docker-compose up`
+
+then navigate to http://localhost:8000/.
+
+
+## Gitleaks Setup
 * `gitleaks` install
 ```bash
 # source
@@ -57,7 +65,7 @@ url="https://repo1.maven.org/maven2/com/madgag/bfg/${ver}/bfg-${ver}.jar"
 curl -LJO $url && mv bfg-${ver}.jar /usr/local/bin/bfg
 ```
 
-## Usage
+## Gitleaks Usage
 ### Blue Team
 * `git commit`
 ```bash
@@ -79,8 +87,8 @@ gitleaks detect --redact -v --no-git -r $GITLEAKS_REPORT
 ```
 * `bfg`
 ```bash
-# remove the offending file first
-git rm .env
+# remove the offending file from git history (leaves local copy)
+git rm --cached .env
 
 # clone problem child
 git clone --mirror git@github.com:pythoninthegrass/gitleaks_demo.git
