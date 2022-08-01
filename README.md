@@ -18,6 +18,7 @@ Learning a programming language is hard. Not committing secrets [doesn't have to
 ## Running the Target App
 
 `docker-compose build --parallel --force-rm`
+
 `docker-compose up`
 
 then navigate to http://localhost:8000/.
