@@ -77,7 +77,26 @@ Testing has primarily been done on macOS, but it's likely most of the code works
     curl -LJO $url && mv bfg-${ver}.jar /usr/local/bin/bfg
     ```
 * Install [asdf](https://asdf-vm.com/guide/getting-started.html#_2-download-asdf)
+* Install Python 3.10.5
+    ```bash
+    # add python plugin
+    asdf plugin-add python
+
+    # install stable python
+    asdf install python 3.10.5
+
+    # refresh symlinks for installed python runtimes
+    asdf reshim python
+    ```
 * Install [poetry](https://python-poetry.org/docs/)
+* Install Python environment
+    ```bash
+    # pip
+    # python3.10 -m pip install -r requirements.txt
+
+    # poetry (preferred)
+    poetry install
+    ```
 * `trufflehog` install
     ```bash
     brew tap trufflesecurity/trufflehog
@@ -186,21 +205,6 @@ Testing has primarily been done on macOS, but it's likely most of the code works
 * `trufflehog`
   * Set either `.env` or env vars for `USERNAME`, `LIMIT`, and `VISIBILITY` (see: `.env.example`)
     ```bash
-    # add python plugin
-    asdf plugin-add python
-
-    # install stable python
-    asdf install python 3.10.5
-
-    # refresh symlinks for installed python runtimes
-    asdf reshim python
-
-    # pip
-    # python3.10 -m pip install -r requirements.txt
-
-    # poetry (preferred)
-    poetry install
-
     # run script
     # python3.10 scan_repos.py          # pip
     poetry run python scan_repos.py     # poetry
