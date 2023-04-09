@@ -10,7 +10,7 @@ This repo covers the content from the Meetup [presentation](https://docs.google.
 Testing has primarily been done on macOS, but it's likely most of the code works on Linux. Windows has not been tested. PRs welcome 🙏 
 
 **Table of Contents**
-* [gitleaks_demo](#gitleaks_demo)
+* [gitleaks\_demo](#gitleaks_demo)
   * [Summary](#summary)
   * [Running the Target App](#running-the-target-app)
   * [Gitleaks Setup](#gitleaks-setup)
@@ -42,6 +42,8 @@ Testing has primarily been done on macOS, but it's likely most of the code works
     git clone https://github.com/zricethezav/gitleaks.git
     cd gitleaks
     make build
+    sudo chown root:root /usr/local/bin/gitleaks
+    sudo mv gitleaks /usr/local/bin/
 
     # brew
     brew install gitleaks
